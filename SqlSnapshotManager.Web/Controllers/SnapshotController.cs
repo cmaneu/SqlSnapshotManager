@@ -46,7 +46,7 @@ namespace SqlSnapshotManager.Web.Controllers
             return "Ok";
         }
 
- [AcceptVerbs("GET","POST")]
+        [AcceptVerbs("GET","POST")]
         public string Delete(string server, string instance,  string snapshot)
         {
             DbSnapshotMgr mgr = new DbSnapshotMgr();
@@ -64,5 +64,13 @@ namespace SqlSnapshotManager.Web.Controllers
             return "Ok";
         }
 
+        [AcceptVerbs("GET","POST")]
+        public Dictionary<string,List<string>> List(string server, string instance)
+        {
+            DbSnapshotMgr mgr = new DbSnapshotMgr();
+            DbConnectionInfo connectionInfo = new DbConnectionInfo(server, instance);
+
+            return mgr.ListSnapshots(connectionInfo);          
+        }
     }
 }

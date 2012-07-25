@@ -299,16 +299,24 @@ namespace DbSnapshotManager.Tests.Core
                 string databaseName = "Certit";
                 string snapshotDatabaseName = "Certit_120725";
 
-                try
-                {
-                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
-                }
-                catch (ArgumentNullException ex)
-                {
-                    Assert.IsTrue(ex.Message.Contains("databaseName"));
-                }
+                target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
             }
 
+        }
+
+        [TestClass()]
+        public class ListSnapshots
+        {
+
+            [TestMethod()]
+            public void ListSnapshot()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+
+                var result = target.ListSnapshots(connectionInfo);
+                Assert.IsTrue(result.Count > 0);
+            }
         }
     }
 }

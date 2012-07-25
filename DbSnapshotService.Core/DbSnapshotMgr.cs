@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.SqlServer.Management.Smo;
 
@@ -99,9 +100,30 @@ namespace DbSnapshotManager.Core
             db.Drop();
         }
 
-        public void ListSnapshots()
+        public Dictionary<string, List<string>> ListSnapshots(DbConnectionInfo connectionInfo)
         {
-            throw new NotImplementedException();
+            Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
+
+            if (connectionInfo == null)
+                throw new ArgumentNullException("connectionInfo must be initialized to create a snapshot.");
+            
+            // 1. Initiate db connection
+            Server server = connectionInfo.GetServer();
+
+            foreach (Database database in server.Databases)
+            {
+                if(database.IsDatabaseSnapshot)
+                {
+                    if(!result.ContainsKey(database.DatabaseSnapshotBaseName))
+                    {
+                        result.Add(database.DatabaseSnapshotBaseName,new List<string>());
+                    }
+
+                    result[database.DatabaseSnapshotBaseName].Add(database.Name);
+                }
+            }
+
+            return result;
         }
 
         public void ListSnapshots(string databaseName)
