@@ -1,26 +1,25 @@
-﻿using DbSnapshotService.Core;
+﻿using System;
+using DbSnapshotManager.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
-namespace DbSnapshotService.Tests.Core
+namespace DbSnapshotManager.Tests.Core
 {
-    
-    
     /// <summary>
-    ///This is a test class for DbSnapshotManagerTest and is intended
-    ///to contain all DbSnapshotManagerTest Unit Tests
+    ///This is a test class for DbSnapshotMgrTest and is intended
+    ///to contain all DbSnapshotMgrTest Unit Tests
     ///</summary>
-    [TestClass()]
-    public class DbSnapshotManagerTest
+    [TestClass]
+    public class DbSnapshotMgrTest
     {
+        #region Nested type: CreateSnapshot
 
-        [TestClass()]
+        [TestClass]
         public class CreateSnapshot
         {
-            [TestMethod()]
+            [TestMethod]
             public void CreateSnapshotNoValidconnectionInfoParameters()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
+                var target = new DbSnapshotMgr();
                 DbConnectionInfo connectionInfo = null;
                 string databaseName = string.Empty;
                 string snapshotDatabaseName = string.Empty;
@@ -33,14 +32,14 @@ namespace DbSnapshotService.Tests.Core
                 catch (ArgumentNullException ex)
                 {
                     Assert.IsTrue(ex.Message.Contains("connectionInfo"));
-                }  
-            } 
-            
-            [TestMethod()]
+                }
+            }
+
+            [TestMethod]
             public void CreateSnapshotNoValidDbNameParameters()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo();
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo();
                 string databaseName = string.Empty;
                 string snapshotDatabaseName = string.Empty;
 
@@ -52,21 +51,20 @@ namespace DbSnapshotService.Tests.Core
                 catch (ArgumentNullException ex)
                 {
                     Assert.IsTrue(ex.Message.Contains("databaseName"));
-                } 
+                }
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void CreateSnapshotMissingDb()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\","SQL2012");
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
                 string databaseName = "UnknowDatabase";
                 string snapshotDatabaseName = string.Empty;
 
                 try
                 {
                     target.CreateSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
-              
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
@@ -74,29 +72,28 @@ namespace DbSnapshotService.Tests.Core
                 }
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void CreateSnapshotValid()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\","SQL2012");
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
                 string databaseName = "Certit";
                 string snapshotDatabaseName = string.Empty;
 
                 target.CreateSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void CreateSnapshotValidthCustomSnapshotName()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\","SQL2012");
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
                 string databaseName = "Certit";
                 string snapshotDatabaseName = "Certit_pretest";
 
                 try
                 {
                     target.CreateSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
-              
                 }
                 catch (ArgumentNullException ex)
                 {
@@ -105,14 +102,17 @@ namespace DbSnapshotService.Tests.Core
             }
         }
 
+        #endregion
 
-        [TestClass()]
+        #region Nested type: DeleteSnapshot
+
+        [TestClass]
         public class DeleteSnapshot
         {
-            [TestMethod()]
+            [TestMethod]
             public void DeleteSnapshotNoValidconnectionInfoParameters()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
+                var target = new DbSnapshotMgr();
                 DbConnectionInfo connectionInfo = null;
                 string snapshotDatabaseName = string.Empty;
 
@@ -127,11 +127,11 @@ namespace DbSnapshotService.Tests.Core
                 }
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void DeleteSnapshotNoValidDbNameParameters()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo();
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo();
                 string snapshotDatabaseName = string.Empty;
 
                 try
@@ -145,17 +145,16 @@ namespace DbSnapshotService.Tests.Core
                 }
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void DeleteSnapshotMissingDb()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
                 string snapshotDatabaseName = "UnknowDatabase";
 
                 try
                 {
                     target.DeleteSnapshot(connectionInfo, snapshotDatabaseName);
-
                 }
                 catch (ArgumentOutOfRangeException ex)
                 {
@@ -163,17 +162,16 @@ namespace DbSnapshotService.Tests.Core
                 }
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void DeleteSnapshotDbIsNotASnapshot()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
                 string snapshotDatabaseName = "Certit";
 
                 try
                 {
                     target.DeleteSnapshot(connectionInfo, snapshotDatabaseName);
-
                 }
                 catch (ArgumentException ex)
                 {
@@ -181,17 +179,136 @@ namespace DbSnapshotService.Tests.Core
                 }
             }
 
-            [TestMethod()]
+            [TestMethod]
             public void DeleteSnapshotValid()
             {
-                DbSnapshotManager target = new DbSnapshotManager();
-                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                var target = new DbSnapshotMgr();
+                var connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
                 string snapshotDatabaseName = "Certit_pretest";
 
                 target.DeleteSnapshot(connectionInfo, snapshotDatabaseName);
             }
+        }
+
+        #endregion
+
+
+        [TestClass()]
+        public class RestoreSnapshot
+        {
+            [TestMethod()]
+            public void InvalidConnectionInfos()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = null;
+                string databaseName = string.Empty;
+                string snapshotDatabaseName = string.Empty;
+
+                try
+                {
+                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
+                    Assert.Fail();
+                }
+                catch (ArgumentNullException ex)
+                {
+                    Assert.IsTrue(ex.Message.Contains("connectionInfo"));
+                }
+            }
+
+            [TestMethod()]
+            public void InvalidDatabaseName()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = new DbConnectionInfo();
+                string databaseName = string.Empty;
+                string snapshotDatabaseName = string.Empty;
+
+                try
+                {
+                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
+                    Assert.Fail();
+                }
+                catch (ArgumentNullException ex)
+                {
+                    Assert.IsTrue(ex.Message.Contains("databaseName"));
+                }
+            }
+
+            [TestMethod()]
+            public void InvalidDatabase()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                string databaseName = "UnknowDatabase";
+                string snapshotDatabaseName = string.Empty;
+
+                try
+                {
+                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
+                    Assert.Fail();
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Assert.IsTrue(ex.Message.Contains("does not exists"));
+                }
+            }
+
+            [TestMethod()]
+            public void InvalidSnapshot()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                string databaseName = "Certit";
+                string snapshotDatabaseName = "UnknowSnapshotDb";
+
+                try
+                {
+                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
+                    Assert.Fail();
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Assert.IsTrue(ex.Message.Contains("does not exists"));
+                }
+            }
+
+            [TestMethod()]
+            public void SnapshotDbIsNotASnapshot()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                string databaseName = "Certit";
+                string snapshotDatabaseName = "Certit";
+
+                try
+                {
+                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
+                    Assert.Fail();
+                }
+                catch (ArgumentException ex)
+                {
+                    Assert.IsTrue(ex.Message.Contains("is not a snapshot"));
+                }
+            }
+
+            [TestMethod()]
+            public void ValidRestore()
+            {
+                DbSnapshotMgr target = new DbSnapshotMgr();
+                DbConnectionInfo connectionInfo = new DbConnectionInfo(@".\", "SQL2012");
+                string databaseName = "Certit";
+                string snapshotDatabaseName = "Certit_120725";
+
+                try
+                {
+                    target.RestoreSnapshot(connectionInfo, databaseName, snapshotDatabaseName);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    Assert.IsTrue(ex.Message.Contains("databaseName"));
+                }
+            }
 
         }
-       
     }
 }

@@ -1,7 +1,6 @@
-﻿using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
+﻿using Microsoft.SqlServer.Management.Smo;
 
-namespace DbSnapshotService.Core
+namespace DbSnapshotManager.Core
 {
     /// <summary>
     /// This class provides SQL Server Database connection information.

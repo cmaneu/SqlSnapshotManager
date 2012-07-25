@@ -1,11 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSnapshotService.Core", "DbSnapshotService.Core\DbSnapshotService.Core.csproj", "{206FABDA-BBA0-4457-A4FC-8C747B0475C4}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSnapshotManager.Core", "DbSnapshotService.Core\DbSnapshotManager.Core.csproj", "{206FABDA-BBA0-4457-A4FC-8C747B0475C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DC88ADC7-1C58-43CE-A7A6-6BE98C63D8A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSnapshotService.Tests.Core", "DbSnapshotService.Tests.Core\DbSnapshotService.Tests.Core.csproj", "{8938F5AF-C03E-466E-92C6-A1C77E3F1AC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbSnapshotManager.Tests.Core", "DbSnapshotService.Tests.Core\DbSnapshotManager.Tests.Core.csproj", "{8938F5AF-C03E-466E-92C6-A1C77E3F1AC7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD937A62-D955-4586-99CD-09FC85D49DDC}"
 	ProjectSection(SolutionItems) = preProject
