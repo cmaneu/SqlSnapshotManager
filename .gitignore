@@ -1,6 +1,25 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 bin
 obj
 
 # mstest test results
 TestResults
+
+*.user
+*.vspscc
+*.vssscc
+*.suo
+
+
+#Tooling
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+
+#ncrunch
+*ncrunch*
+*crunch*.local.xml
