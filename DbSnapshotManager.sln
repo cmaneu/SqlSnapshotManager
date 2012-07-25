@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSnapshotManager.Web", "SqlSnapshotManager.Web\SqlSnapshotManager.Web.csproj", "{11D27B87-2A25-44E2-8CEA-1EBA407CA746}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = DbSnapshotService.vsmdi
@@ -23,6 +25,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11D27B87-2A25-44E2-8CEA-1EBA407CA746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D27B87-2A25-44E2-8CEA-1EBA407CA746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D27B87-2A25-44E2-8CEA-1EBA407CA746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D27B87-2A25-44E2-8CEA-1EBA407CA746}.Release|Any CPU.Build.0 = Release|Any CPU
 		{206FABDA-BBA0-4457-A4FC-8C747B0475C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{206FABDA-BBA0-4457-A4FC-8C747B0475C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{206FABDA-BBA0-4457-A4FC-8C747B0475C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
