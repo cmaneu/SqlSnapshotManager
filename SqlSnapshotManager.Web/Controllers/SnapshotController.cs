@@ -10,11 +10,23 @@ namespace SqlSnapshotManager.Web.Controllers
 {
     public class SnapshotController : System.Web.Http.ApiController
     {
+
+        // api/snapshot/create?server=srvdb01&instance=SQL2012&db=MaBase&snapshot=Mabase_Pretest
         [AcceptVerbs("GET","POST")]
-        public string Create(string server, string instance, string database, string snapshot)
+        public string Create(string server, string instance, string database, string snapshot, string username = "", string password="")
         {
             DbSnapshotMgr mgr = new DbSnapshotMgr();
-            DbConnectionInfo connectionInfo = new DbConnectionInfo(server,instance);
+            DbConnectionInfo connectionInfo;
+            if(!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                connectionInfo = new DbConnectionInfo(server, instance, username, password);
+            }
+            else
+            {
+                connectionInfo  = new DbConnectionInfo(server,instance);
+            }
+
+         
             try
             {
                   mgr.CreateSnapshot(connectionInfo,database,snapshot);
@@ -29,10 +41,19 @@ namespace SqlSnapshotManager.Web.Controllers
         }
 
         [AcceptVerbs("GET","POST")]
-        public string Restore(string server, string instance, string database, string snapshot)
+        public string Restore(string server, string instance, string database, string snapshot, string username = "", string password="")
         {
             DbSnapshotMgr mgr = new DbSnapshotMgr();
-            DbConnectionInfo connectionInfo = new DbConnectionInfo(server,instance);
+            DbConnectionInfo connectionInfo;
+            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                connectionInfo = new DbConnectionInfo(server, instance, username, password);
+            }
+            else
+            {
+                connectionInfo = new DbConnectionInfo(server, instance);
+            }
+
             try
             {
                   mgr.RestoreSnapshot(connectionInfo,database,snapshot);

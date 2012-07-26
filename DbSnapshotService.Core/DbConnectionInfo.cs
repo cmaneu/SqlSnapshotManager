@@ -63,6 +63,15 @@ namespace DbSnapshotManager.Core
             Password = password;
         }
 
+        public DbConnectionInfo(string serverAddress, string instanceName, string username, string password)
+        {
+            ServerAddress = serverAddress;
+            Instance = instanceName;
+            UseImpersonation = false;
+            UserName = username;
+            Password = password;
+        }
+
         internal Server GetServer()
         {
 
